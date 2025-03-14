@@ -34,6 +34,9 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent. See `:help 'clipboard'`
 -- Function to toggle system clipboard
+-- turn the clipboard on by default
+vim.opt.clipboard = { 'unnamedplus' }
+
 function ToggleClipboard()
   local current_clipboard = vim.opt.clipboard:get()
 
@@ -56,6 +59,9 @@ function ClipboardStatus()
 end
 
 -- Set statusline with clipboard status
+-- vim.o.statusline = '%{v:lua.ClipboardStatus()}'
+vim.o.laststatus = 2
+
 vim.o.statusline = '%f %m %r %h %w %= ' .. '%{v:lua.ClipboardStatus()} %y %p%% %l:%c'
 
 -- Map to a keybinding
@@ -926,7 +932,7 @@ require('lazy').setup({
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
-        return '%2l:%-2v'
+        return '%2l:%-2v' .. ClipboardStatus()
       end
 
       -- ... and there is more!
