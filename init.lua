@@ -487,7 +487,7 @@ require('lazy').setup({
       local lspconfig = require 'lspconfig'
 
       -- Setup LSP servers
-      local servers = { 'gopls', 'htmx', 'cssls', 'jsonls', 'html' }
+      local servers = { 'htmx', 'cssls', 'jsonls', 'html' }
       for _, server in ipairs(servers) do
         lspconfig[server].setup {}
       end
